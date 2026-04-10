@@ -269,6 +269,11 @@ section { padding:110px 24px }
 .cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,var(--blue-faint) 0%,transparent 65%); pointer-events:none }
 .cta-in { position:relative; z-index:2 }
 .bl { width:4px; height:60px; margin:0 auto 36px; background:repeating-linear-gradient(135deg,var(--blue) 0px,var(--blue) 8px,var(--bg) 8px,var(--bg) 16px,var(--text) 16px,var(--text) 24px,var(--bg) 24px,var(--bg) 32px); border-radius:2px }
+.cta-logo {
+  display:block; margin:0 auto 32px;
+  width:clamp(140px,18vw,200px); height:auto;
+  filter:drop-shadow(0 10px 40px rgba(45,140,240,0.4));
+}
 .cta h2 { font-family:'Playfair Display',serif; font-size:clamp(2.1rem,5vw,4.2rem); font-weight:900; margin-bottom:18px; line-height:1.1 }
 .cta h2 em { font-style:italic; color:var(--blue) }
 .cta-in > p { font-size:1rem; color:var(--dim); max-width:480px; margin:0 auto 44px; line-height:1.7; font-weight:300 }
@@ -439,6 +444,7 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
   .cnf { flex-direction:column; align-items:center; gap:14px }
   .cnf span { font-size:.78rem; color:#A8B4C2 }
   .bl { height:48px; margin-bottom:30px }
+  .cta-logo { width:130px; margin-bottom:26px }
 
   /* FOOTER */
   footer {
@@ -601,7 +607,7 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
 
 <section class="cta" id="contacto">
   <div class="cta-in sr">
-    <div class="bl"></div>
+    <img src="assets/logo.png" alt="Focus Studios" class="cta-logo">
     <h2>¿Listo para dejar de<br>ser uno <em>más</em>?</h2>
     <p>Cuéntanos sobre tu negocio y te preparamos una propuesta que te hará destacar entre la competencia.</p>
     <div class="cb">
