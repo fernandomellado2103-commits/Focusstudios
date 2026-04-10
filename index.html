@@ -49,7 +49,7 @@ nav {
   border-bottom:1px solid var(--blue-line);
 }
 .nl { display:flex; align-items:center; text-decoration:none }
-.nl img { height:42px; width:auto; display:block }
+.nl img { height:90px; width:auto; display:block }
 .nk { display:flex; gap:32px; list-style:none }
 .nk a { color:var(--dim); text-decoration:none; font-size:.78rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; transition:color .3s; position:relative }
 .nk a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--blue); transition:width .3s }
@@ -70,12 +70,12 @@ nav {
   background-image:url('assets/hero-bg.png');
   background-size:cover;
   background-position:center;
-  opacity:0.18;
+  opacity:0.45;
   pointer-events:none;
 }
 .hero-img::after {
   content:''; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.7) 100%);
+  background:linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0.55) 60%, rgba(10,10,10,0.85) 100%);
 }
 .hero-bg {
   position:absolute; inset:0; pointer-events:none;
@@ -91,6 +91,11 @@ nav {
   background-size:80px 80px;
 }
 .hero-in { position:relative; z-index:2; max-width:1050px }
+.hero-logo {
+  display:block; margin:0 auto 36px;
+  width:clamp(260px,34vw,420px); height:auto;
+  filter:drop-shadow(0 12px 48px rgba(45,140,240,0.5));
+}
 .hb {
   display:inline-flex; align-items:center; gap:9px;
   background:rgba(45,140,240,.07); border:1px solid rgba(45,140,240,.18);
@@ -270,7 +275,7 @@ section { padding:110px 24px }
 
 /* ═══ FOOTER ═══ */
 footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex; justify-content:space-between; align-items:center }
-.fl img { height:36px; width:auto; display:block }
+.fl img { height:72px; width:auto; display:block }
 .fc { font-size:.7rem; color:var(--dim) }
 
 /* ═══ RESPONSIVE ═══ */
@@ -286,7 +291,8 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
 }
 @media(max-width:520px) {
   nav { padding:14px 16px }
-  .nl img { height:34px }
+  .nl img { height:66px }
+  .hero-logo { width:230px; margin-bottom:28px }
   .nc { padding:7px 14px; font-size:.65rem }
   .hero { padding:88px 16px 50px }
   .hero h1 { font-size:2.1rem; margin-bottom:18px }
@@ -357,6 +363,7 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-in">
+    <img src="assets/logo.png" alt="Focus Studios" class="hero-logo anim d1">
     <div class="hb anim d1"><span class="dot"></span> Disponible para nuevos proyectos</div>
     <h1 class="anim d2">En un rebaño de iguales,<br>sé la que <em>destaca</em></h1>
     <p class="hero-sub anim d3">Mientras el resto se conforma con lo mismo de siempre, nosotros creamos la web que hará que tu negocio sea el que todos recuerdan.</p>
