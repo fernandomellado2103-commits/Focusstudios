@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Focus Studios — Diseño Web para tu Negocio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #2D8CF0;
+  --blue-light: #5AA8F5;
+  --blue-glow: rgba(45,140,240,0.12);
+  --blue-faint: rgba(45,140,240,0.06);
+  --blue-line: rgba(45,140,240,0.1);
+  --bg: #0A0A0A;
+  --bg2: #111111;
+  --bg3: #181818;
+  --text: #F0F2F4;
+  --dim: #7A8B9A;
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ═══ ANIMATIONS ═══ */
+@keyframes rise { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+@keyframes glow { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.7)} }
+@keyframes drift { 0%,100%{opacity:1;height:34px} 50%{opacity:.3;height:18px} }
+.anim { animation:rise .9s cubic-bezier(.16,1,.3,1) both }
+.d1{animation-delay:.1s} .d2{animation-delay:.25s} .d3{animation-delay:.4s} .d4{animation-delay:.55s}
+.sr { opacity:0; transform:translateY(30px) }
+.sr.v { animation:rise .8s cubic-bezier(.16,1,.3,1) forwards }
+
+/* ═══ NAV ═══ */
+nav {
+  position:fixed; top:0; width:100%; z-index:1000;
+  padding:max(16px,env(safe-area-inset-top)) 40px 16px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(10,10,10,.88);
+  -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--blue-line);
+}
+.nl { display:flex; align-items:center; text-decoration:none }
+.nl img { height:42px; width:auto; display:block }
+.nk { display:flex; gap:32px; list-style:none }
+.nk a { color:var(--dim); text-decoration:none; font-size:.78rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; transition:color .3s; position:relative }
+.nk a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--blue); transition:width .3s }
+.nk a:hover { color:var(--blue) }
+.nk a:hover::after { width:100% }
+.nc { border:1px solid var(--blue); color:var(--blue); padding:9px 20px; font-size:.72rem; letter-spacing:2px; text-transform:uppercase; text-decoration:none; transition:all .3s; font-family:'DM Sans',sans-serif }
+.nc:hover { background:var(--blue); color:var(--bg) }
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height:100vh; min-height:100dvh;
+  display:flex; align-items:center; justify-content:center;
+  padding:120px 24px 80px; text-align:center;
+  position:relative; overflow:hidden;
+}
+.hero-img {
+  position:absolute; inset:0;
+  background-image:url('assets/hero-bg.png');
+  background-size:cover;
+  background-position:center;
+  opacity:0.18;
+  pointer-events:none;
+}
+.hero-img::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.7) 100%);
+}
+.hero-bg {
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 50% at 65% 40%,var(--blue-faint) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 50% at 25% 75%,rgba(45,140,240,.03) 0%,transparent 50%);
+}
+.hero-grid {
+  position:absolute; inset:0; pointer-events:none;
+  background-image:
+    linear-gradient(90deg,rgba(45,140,240,.025) 1px,transparent 1px),
+    linear-gradient(0deg,rgba(45,140,240,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+}
+.hero-in { position:relative; z-index:2; max-width:1050px }
+.hb {
+  display:inline-flex; align-items:center; gap:9px;
+  background:rgba(45,140,240,.07); border:1px solid rgba(45,140,240,.18);
+  padding:7px 18px; border-radius:24px;
+  font-size:.7rem; letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--blue); margin-bottom:36px;
+}
+.hb .dot { width:6px; height:6px; background:var(--blue); border-radius:50%; animation:glow 2s infinite }
+.hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,6.2rem); font-weight:900; line-height:1.06; margin-bottom:24px }
+.hero h1 em { font-style:italic; color:var(--blue); position:relative }
+.hero h1 em::after { content:''; position:absolute; bottom:4px; left:0; width:100%; height:3px; background:var(--blue); opacity:.25 }
+.hero-sub { font-size:clamp(.95rem,2.5vw,1.15rem); line-height:1.7; color:var(--dim); max-width:580px; margin:0 auto 44px; font-weight:300 }
+.hbtns { display:flex; justify-content:center; gap:16px; flex-wrap:wrap }
+
+.bp { background:var(--blue); color:var(--bg); padding:15px 38px; font-weight:700; font-size:.82rem; letter-spacing:2px; text-transform:uppercase; border:none; text-decoration:none; display:inline-block; transition:all .3s; font-family:'DM Sans',sans-serif }
+.bp:hover { background:var(--blue-light); transform:translateY(-2px); box-shadow:0 12px 36px rgba(45,140,240,.3) }
+.bs { background:transparent; color:var(--text); padding:15px 38px; font-weight:600; font-size:.82rem; letter-spacing:2px; text-transform:uppercase; border:1px solid rgba(255,255,255,.15); text-decoration:none; display:inline-block; transition:all .3s; font-family:'DM Sans',sans-serif }
+.bs:hover { border-color:var(--blue); color:var(--blue) }
+
+.hscr { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:6px }
+.hscr span { font-size:.6rem; letter-spacing:3px; text-transform:uppercase; color:var(--dim) }
+.sbar { width:1px; height:34px; background:linear-gradient(to bottom,var(--blue),transparent); animation:drift 2s infinite }
+
+/* ═══ STATS ═══ */
+.stats { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--blue-line); border-bottom:1px solid var(--blue-line) }
+.st { padding:44px 20px; text-align:center; border-right:1px solid rgba(45,140,240,.06); transition:background .3s }
+.st:last-child { border-right:none }
+.st:hover { background:var(--blue-faint) }
+.st h3 { font-family:'Bebas Neue',sans-serif; font-size:3.2rem; color:var(--blue); line-height:1; margin-bottom:6px }
+.st p { font-size:.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--dim) }
+
+/* ═══ SHARED ═══ */
+section { padding:110px 24px }
+.lab { font-family:'Bebas Neue',sans-serif; font-size:.8rem; letter-spacing:5px; text-transform:uppercase; color:var(--blue); margin-bottom:14px }
+.ttl { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,4vw,3.2rem); font-weight:700; line-height:1.15; margin-bottom:18px }
+.dsc { font-size:1rem; line-height:1.7; color:var(--dim); max-width:540px; font-weight:300 }
+
+/* ═══ PORTFOLIO ═══ */
+.portfolio { background:var(--bg2) }
+.ph { text-align:center; margin-bottom:72px }
+.ph .dsc { margin:0 auto }
+.case { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--blue-line); overflow:hidden }
+.cv {
+  background:linear-gradient(145deg,var(--bg3),var(--bg));
+  padding:56px; display:flex; align-items:center; justify-content:center;
+  position:relative; min-height:520px;
+}
+.cv::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 35% 45%,var(--blue-glow) 0%,transparent 55%); pointer-events:none }
+
+/* CSS-ONLY PHONE MOCKUP */
+.phone {
+  position:relative; z-index:2; width:268px;
+  background:#000; border-radius:40px;
+  border:3px solid #2a2a2a; overflow:hidden;
+  box-shadow:0 28px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.04), 0 0 50px rgba(45,140,240,.06);
+  transform:perspective(900px) rotateY(-4deg) rotateX(2deg);
+  transition:transform .5s;
+}
+.phone:hover { transform:perspective(900px) rotateY(0) rotateX(0) }
+.pn { height:30px; background:#000; display:flex; justify-content:center; align-items:flex-end }
+.pn-in { width:90px; height:22px; background:#1a1a1a; border-radius:0 0 14px 14px }
+
+/* Fake screen content mimicking ACR Barberstudio */
+.ps {
+  width:262px; height:490px; overflow:hidden;
+  background:linear-gradient(180deg,#0a0a0a 0%,#111 100%);
+  padding:16px;
+}
+.ps-logo {
+  font-family:'Playfair Display',serif;
+  font-size:1rem; color:var(--blue); font-weight:700;
+  text-align:center; margin-bottom:14px;
+  letter-spacing:1px;
+}
+.ps-hero {
+  width:100%; height:130px; border-radius:8px;
+  background:linear-gradient(135deg,#1a1520 0%,#0f1018 50%,#141414 100%);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  margin-bottom:14px; position:relative; overflow:hidden;
+}
+.ps-hero::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 60%, rgba(45,140,240,.08) 0%, transparent 70%);
+}
+.ps-hero h3 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.3rem; letter-spacing:5px;
+  color:var(--blue); position:relative; z-index:1;
+}
+.ps-hero span {
+  font-size:.5rem; letter-spacing:3px; text-transform:uppercase;
+  color:var(--dim); margin-top:4px; position:relative; z-index:1;
+}
+.ps-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px }
+.ps-card {
+  background:rgba(45,140,240,.04);
+  border:1px solid rgba(45,140,240,.08);
+  border-radius:8px; padding:14px 8px; text-align:center;
+}
+.ps-card-ico { font-size:1.3rem; margin-bottom:4px }
+.ps-card-nm { font-size:.5rem; text-transform:uppercase; letter-spacing:1px; color:var(--dim) }
+.ps-card-pr { font-size:.6rem; color:var(--blue); margin-top:2px; font-weight:600 }
+
+.ps-btn {
+  display:block; width:100%; padding:10px;
+  background:var(--blue); color:var(--bg);
+  text-align:center; border-radius:6px;
+  font-size:.6rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:12px;
+}
+.ps-footer {
+  display:flex; justify-content:space-around;
+  padding-top:10px; border-top:1px solid rgba(255,255,255,.04);
+}
+.ps-footer span { font-size:.45rem; color:var(--dim); text-transform:uppercase; letter-spacing:1px }
+
+.pb { height:22px; background:#000; display:flex; justify-content:center; align-items:center }
+.pb-in { width:100px; height:4px; background:#333; border-radius:2px }
+
+.ci { padding:52px; display:flex; flex-direction:column; justify-content:center }
+.ci-cl { font-family:'Bebas Neue',sans-serif; font-size:.72rem; letter-spacing:4px; color:var(--blue); margin-bottom:10px }
+.ci-nm { font-family:'Playfair Display',serif; font-size:2.1rem; font-weight:700; margin-bottom:18px; line-height:1.2 }
+.ci-ds { font-size:.93rem; line-height:1.8; color:var(--dim); font-weight:300; margin-bottom:30px }
+.ci-ft { list-style:none; margin-bottom:30px }
+.ci-ft li { padding:9px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.85rem; display:flex; align-items:center; gap:10px }
+.ci-ft .ck { color:var(--blue); font-weight:700 }
+.tag { display:inline-block; background:rgba(45,140,240,.06); border:1px solid var(--blue-line); padding:3px 10px; font-size:.64rem; letter-spacing:1px; text-transform:uppercase; color:var(--blue-light); margin:0 6px 6px 0 }
+
+/* ═══ SERVICES ═══ */
+.svhd { margin-bottom:72px }
+.sg { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--blue-line) }
+.sv { background:var(--bg); padding:48px 36px; position:relative; overflow:hidden; transition:background .35s }
+.sv::before { content:''; position:absolute; top:0; left:0; width:100%; height:2px; background:linear-gradient(90deg,transparent,var(--blue),transparent); opacity:0; transition:opacity .35s }
+.sv:hover { background:var(--bg2) }
+.sv:hover::before { opacity:1 }
+.sv-n { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; color:rgba(45,140,240,.08); line-height:1; margin-bottom:18px }
+.sv h3 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; margin-bottom:12px }
+.sv p { font-size:.85rem; line-height:1.7; color:var(--dim); font-weight:300 }
+
+/* ═══ WHY ═══ */
+.why { background:var(--bg2) }
+.ww { max-width:1140px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center }
+.qt { background:var(--bg); border-left:3px solid var(--blue); padding:40px; position:relative }
+.qt::before { content:'\201C'; position:absolute; top:12px; left:16px; font-family:'Playfair Display',serif; font-size:4rem; color:rgba(45,140,240,.08); line-height:1 }
+.qt blockquote { font-family:'Playfair Display',serif; font-size:1.3rem; font-style:italic; line-height:1.6; margin-bottom:18px }
+.qt cite { font-size:.76rem; letter-spacing:2px; text-transform:uppercase; color:var(--blue); font-style:normal }
+.wl { display:flex; flex-direction:column; gap:30px }
+.wi { display:flex; gap:16px }
+.wi-i { flex-shrink:0; width:46px; height:46px; background:rgba(45,140,240,.06); border:1px solid var(--blue-line); display:flex; align-items:center; justify-content:center; font-size:1.1rem; color:var(--blue) }
+.wi h4 { font-size:.95rem; font-weight:600; margin-bottom:4px }
+.wi p { font-size:.85rem; line-height:1.6; color:var(--dim); font-weight:300 }
+
+/* ═══ PROCESS ═══ */
+.prh { text-align:center; margin-bottom:72px }
+.prh .dsc { margin:0 auto }
+.stps { max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); position:relative }
+.stps::before { content:''; position:absolute; top:34px; left:12.5%; right:12.5%; height:1px; background:linear-gradient(90deg,transparent,var(--blue),var(--blue),transparent); opacity:.2 }
+.stp { text-align:center; padding:0 14px }
+.stp-n { font-family:'Bebas Neue',sans-serif; font-size:.7rem; letter-spacing:3px; color:var(--blue) }
+.stp-d { width:12px; height:12px; border:2px solid var(--blue); border-radius:50%; margin:22px auto 20px; background:var(--bg); position:relative; z-index:2 }
+.stp-d::after { content:''; position:absolute; inset:2px; background:var(--blue); border-radius:50% }
+.stp h4 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; margin-bottom:10px }
+.stp p { font-size:.78rem; line-height:1.6; color:var(--dim); font-weight:300 }
+
+/* ═══ CTA ═══ */
+.cta { text-align:center; padding:150px 24px; position:relative; background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%) }
+.cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,var(--blue-faint) 0%,transparent 65%); pointer-events:none }
+.cta-in { position:relative; z-index:2 }
+.bl { width:4px; height:60px; margin:0 auto 36px; background:repeating-linear-gradient(135deg,var(--blue) 0px,var(--blue) 8px,var(--bg) 8px,var(--bg) 16px,var(--text) 16px,var(--text) 24px,var(--bg) 24px,var(--bg) 32px); border-radius:2px }
+.cta h2 { font-family:'Playfair Display',serif; font-size:clamp(2.1rem,5vw,4.2rem); font-weight:900; margin-bottom:18px; line-height:1.1 }
+.cta h2 em { font-style:italic; color:var(--blue) }
+.cta-in > p { font-size:1rem; color:var(--dim); max-width:480px; margin:0 auto 44px; line-height:1.7; font-weight:300 }
+.cb { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:52px }
+.cnf { display:flex; justify-content:center; gap:40px; flex-wrap:wrap }
+.cnf span { font-size:.8rem; color:var(--dim) }
+
+/* ═══ FOOTER ═══ */
+footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex; justify-content:space-between; align-items:center }
+.fl img { height:36px; width:auto; display:block }
+.fc { font-size:.7rem; color:var(--dim) }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px) {
+  .nk { display:none }
+  .case { grid-template-columns:1fr }
+  .sg { grid-template-columns:1fr }
+  .ww { grid-template-columns:1fr; gap:36px }
+  .stps { grid-template-columns:1fr 1fr; gap:36px 0 }
+  .stps::before { display:none }
+  .cv { min-height:auto; padding:44px 24px }
+  .ci { padding:36px 24px }
+}
+@media(max-width:520px) {
+  nav { padding:14px 16px }
+  .nl img { height:34px }
+  .nc { padding:7px 14px; font-size:.65rem }
+  .hero { padding:88px 16px 50px }
+  .hero h1 { font-size:2.1rem; margin-bottom:18px }
+  .hb { font-size:.58rem; padding:5px 12px; margin-bottom:24px }
+  .hero-sub { font-size:.9rem; margin-bottom:30px }
+  .hbtns { flex-direction:column }
+  .bp,.bs { width:100%; text-align:center; padding:14px 20px; font-size:.78rem }
+  .hscr { bottom:20px }
+  .stats { grid-template-columns:1fr 1fr }
+  .st { padding:28px 14px }
+  .st:nth-child(2n) { border-right:none }
+  .st h3 { font-size:2.4rem }
+  .st p { font-size:.6rem; letter-spacing:1.5px }
+  section { padding:68px 16px }
+  .ttl { font-size:1.65rem }
+  .dsc { font-size:.88rem }
+  .cv { padding:32px 16px }
+  .phone { width:210px; border-radius:30px; transform:none }
+  .phone:hover { transform:none }
+  .pn { height:24px }
+  .pn-in { width:72px; height:18px; border-radius:0 0 10px 10px }
+  .ps { width:204px; height:385px; padding:12px }
+  .ps-logo { font-size:.85rem; margin-bottom:10px }
+  .ps-hero { height:100px }
+  .ps-hero h3 { font-size:1rem; letter-spacing:4px }
+  .ps-card { padding:10px 6px }
+  .ps-card-ico { font-size:1rem }
+  .pb { height:18px }
+  .pb-in { width:80px; height:3px }
+  .ci { padding:24px 16px }
+  .ci-nm { font-size:1.5rem }
+  .ci-ds { font-size:.85rem; margin-bottom:20px }
+  .ci-ft li { font-size:.8rem; padding:7px 0 }
+  .sv { padding:32px 20px }
+  .sv-n { font-size:2rem; margin-bottom:12px }
+  .sv h3 { font-size:1.1rem }
+  .sv p { font-size:.8rem }
+  .qt { padding:24px 16px }
+  .qt blockquote { font-size:1.05rem }
+  .qt::before { font-size:3rem; top:6px; left:10px }
+  .wi-i { width:38px; height:38px; font-size:.95rem }
+  .stps { grid-template-columns:1fr; gap:28px }
+  .stp h4 { font-size:.95rem }
+  .cta { padding:80px 16px }
+  .cta h2 { font-size:1.85rem }
+  .cb { flex-direction:column }
+  .cb .bp,.cb .bs { width:100%; text-align:center }
+  .cnf { flex-direction:column; align-items:center; gap:12px }
+  .bl { height:44px; margin-bottom:28px }
+  footer { flex-direction:column; gap:8px; text-align:center }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nl"><img src="assets/logo.png" alt="Focus Studios"></a>
+  <ul class="nk">
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+  </ul>
+  <a href="#contacto" class="nc">Hablemos</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-in">
+    <div class="hb anim d1"><span class="dot"></span> Disponible para nuevos proyectos</div>
+    <h1 class="anim d2">En un rebaño de iguales,<br>sé la que <em>destaca</em></h1>
+    <p class="hero-sub anim d3">Mientras el resto se conforma con lo mismo de siempre, nosotros creamos la web que hará que tu negocio sea el que todos recuerdan.</p>
+    <div class="hbtns anim d4">
+      <a href="#contacto" class="bp">Solicitar presupuesto</a>
+      <a href="#portfolio" class="bs">Ver nuestro trabajo</a>
+    </div>
+  </div>
+  <div class="hscr anim d4"><span>Scroll</span><div class="sbar"></div></div>
+</section>
+
+<div class="stats">
+  <div class="st sr"><h3>100%</h3><p>Clientes satisfechos</p></div>
+  <div class="st sr"><h3>24h</h3><p>Respuesta máxima</p></div>
+  <div class="st sr"><h3>SEO</h3><p>Optimización incluida</p></div>
+  <div class="st sr"><h3>&infin;</h3><p>Revisiones hasta tu OK</p></div>
+</div>
+
+<section class="portfolio" id="portfolio">
+  <div class="ph sr">
+    <div class="lab">Portfolio</div>
+    <h2 class="ttl">Trabajo real,<br>resultados reales</h2>
+    <p class="dsc">Cada proyecto se desarrolla desde cero, con atención al detalle y enfocado en convertir visitantes en clientes.</p>
+  </div>
+  <div class="case sr">
+    <div class="cv">
+      <div class="phone">
+        <div class="pn"><div class="pn-in"></div></div>
+        <div class="ps">
+          <div class="ps-logo">ACR Barberstudio</div>
+          <div class="ps-hero">
+            <h3>BARBERSTUDIO</h3>
+            <span>Marco tu estilo</span>
+          </div>
+          <div class="ps-grid">
+            <div class="ps-card"><div class="ps-card-ico">&#9986;</div><div class="ps-card-nm">Corte</div><div class="ps-card-pr">15&euro;</div></div>
+            <div class="ps-card"><div class="ps-card-ico">&#9889;</div><div class="ps-card-nm">Barba</div><div class="ps-card-pr">10&euro;</div></div>
+            <div class="ps-card"><div class="ps-card-ico">&#9733;</div><div class="ps-card-nm">Premium</div><div class="ps-card-pr">25&euro;</div></div>
+            <div class="ps-card"><div class="ps-card-ico">&#9830;</div><div class="ps-card-nm">Color</div><div class="ps-card-pr">20&euro;</div></div>
+          </div>
+          <div class="ps-btn">Reservar cita</div>
+          <div class="ps-footer">
+            <span>Inicio</span>
+            <span>Servicios</span>
+            <span>Galeria</span>
+            <span>Contacto</span>
+          </div>
+        </div>
+        <div class="pb"><div class="pb-in"></div></div>
+      </div>
+    </div>
+    <div class="ci">
+      <div class="ci-cl">Caso de éxito</div>
+      <h3 class="ci-nm">ACR Barberstudio — Córdoba</h3>
+      <p class="ci-ds">Web profesional con diseño inspirado en Apple para una barbería de alto nivel en Córdoba. Proyecto completo: desde la identidad digital hasta la integración con sistemas de reservas.</p>
+      <ul class="ci-ft">
+        <li><span class="ck">—</span> Diseño responsive premium oscuro</li>
+        <li><span class="ck">—</span> Menú completo de servicios y precios</li>
+        <li><span class="ck">—</span> Galería de trabajos interactiva</li>
+        <li><span class="ck">—</span> Integración directa con Booksy</li>
+        <li><span class="ck">—</span> Google Maps y SEO local</li>
+        <li><span class="ck">—</span> Panel de administración personalizado</li>
+      </ul>
+      <div>
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag">Responsive</span>
+        <span class="tag">Booksy API</span>
+        <span class="tag">SEO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="svhd sr">
+    <div class="lab">Servicios</div>
+    <h2 class="ttl">Todo lo que tu<br>negocio necesita online</h2>
+    <p class="dsc">Soluciones web completas diseñadas para hacer crecer tu negocio y conectar con tus clientes.</p>
+  </div>
+  <div class="sg">
+    <div class="sv sr"><div class="sv-n">01</div><h3>Diseño Web a Medida</h3><p>Webs únicas que reflejan la personalidad de tu negocio. Sin plantillas genéricas, todo diseñado desde cero con tu estilo.</p></div>
+    <div class="sv sr"><div class="sv-n">02</div><h3>Reservas Online</h3><p>Integración con Booksy, Treatwell o el sistema que prefieras. Tus clientes reservan en segundos, tú gestionas sin complicaciones.</p></div>
+    <div class="sv sr"><div class="sv-n">03</div><h3>SEO Local</h3><p>Posicionamiento en Google para que te encuentren los clientes de tu zona. Google Maps, fichas y optimización.</p></div>
+    <div class="sv sr"><div class="sv-n">04</div><h3>Catálogo de Servicios</h3><p>Muestra tus cortes, tratamientos y precios de forma clara y atractiva. Actualizable fácilmente cuando lo necesites.</p></div>
+    <div class="sv sr"><div class="sv-n">05</div><h3>Galería y Portfolio</h3><p>Secciones para presumir tus mejores trabajos. Fotos de antes y después, estilos y tendencias que atraen nuevos clientes.</p></div>
+    <div class="sv sr"><div class="sv-n">06</div><h3>Mantenimiento y Soporte</h3><p>No te dejamos solo después de la entrega. Actualizaciones, cambios y soporte técnico para que tu web siempre funcione perfecta.</p></div>
+  </div>
+</section>
+
+<section class="why" id="porque">
+  <div class="ww">
+    <div class="qt sr">
+      <blockquote>"Focus Studios entendió desde el primer momento lo que necesitaba mi negocio. El resultado superó todas mis expectativas."</blockquote>
+      <cite>— Cliente de ACR Barberstudio</cite>
+    </div>
+    <div class="sr">
+      <div class="lab">¿Por qué nosotros?</div>
+      <h2 class="ttl">Entendemos tu negocio</h2>
+      <div class="wl">
+        <div class="wi"><div class="wi-i">&#9986;</div><div><h4>Adaptados a cada negocio</h4><p>No somos desarrolladores genéricos. Entendemos tu sector, tus necesidades y lo que funciona para atraer clientes.</p></div></div>
+        <div class="wi"><div class="wi-i">&#9889;</div><div><h4>Comunicación directa</h4><p>Trato directo con nosotros, sin intermediarios. Hablas con quien diseña y programa tu web.</p></div></div>
+        <div class="wi"><div class="wi-i">&#9678;</div><div><h4>Enfocados en resultados</h4><p>Tu web no es solo bonita — está pensada para que consigas más reservas y más visibilidad en tu zona.</p></div></div>
+        <div class="wi"><div class="wi-i">&#8734;</div><div><h4>Soporte continuo</h4><p>Después de la entrega, seguimos aquí. Cambios, mejoras y actualizaciones sin dejarte tirado.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="prh sr">
+    <div class="lab">Proceso</div>
+    <h2 class="ttl">De la idea a tu web<br>en 4 pasos</h2>
+    <p class="dsc">Un proceso sencillo y transparente para que sepas exactamente qué esperar.</p>
+  </div>
+  <div class="stps sr">
+    <div class="stp"><div class="stp-n">Paso 01</div><div class="stp-d"></div><h4>Consulta</h4><p>Hablamos sobre tu negocio, tu estilo y tus objetivos. Gratis y sin compromiso.</p></div>
+    <div class="stp"><div class="stp-n">Paso 02</div><div class="stp-d"></div><h4>Diseño</h4><p>Creamos un diseño personalizado que refleje la identidad de tu negocio.</p></div>
+    <div class="stp"><div class="stp-n">Paso 03</div><div class="stp-d"></div><h4>Desarrollo</h4><p>Programamos tu web con todas las funcionalidades: reservas, galería, SEO y más.</p></div>
+    <div class="stp"><div class="stp-n">Paso 04</div><div class="stp-d"></div><h4>Lanzamiento</h4><p>Publicamos tu web, te formamos en su uso y te acompañamos con soporte continuo.</p></div>
+  </div>
+</section>
+
+<section class="cta" id="contacto">
+  <div class="cta-in sr">
+    <div class="bl"></div>
+    <h2>¿Listo para dejar de<br>ser uno <em>más</em>?</h2>
+    <p>Cuéntanos sobre tu negocio y te preparamos una propuesta que te hará destacar entre la competencia.</p>
+    <div class="cb">
+      <a href="https://wa.me/34637643048" class="bp" target="_blank">WhatsApp directo</a>
+      <a href="#contacto" class="bs" id="emailBtn">Enviar email</a>
+    </div>
+    <div class="cnf">
+      <span>Córdoba, España</span>
+      <span>Respuesta en menos de 24h</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl"><img src="assets/logo.png" alt="Focus Studios"></div>
+  <div class="fc">&copy; 2026 Focus Studios</div>
+</footer>
+
+<script>
+(function(){
+  var s=document.querySelectorAll('.sr'),t;
+  if(!s.length)return;
+  t=setTimeout(function(){for(var i=0;i<s.length;i++)s[i].classList.add('v')},1500);
+  if('IntersectionObserver' in window){
+    var o=new IntersectionObserver(function(e){
+      for(var i=0;i<e.length;i++)if(e[i].isIntersecting){e[i].target.classList.add('v');o.unobserve(e[i].target)}
+    },{threshold:0.01,rootMargin:'0px 0px 60px 0px'});
+    for(var i=0;i<s.length;i++)o.observe(s[i]);
+  }else{clearTimeout(t);for(var i=0;i<s.length;i++)s[i].classList.add('v')}
+})();
+document.getElementById('emailBtn').addEventListener('click',function(e){
+  e.preventDefault();
+  window.location.href='mai'+'lto:'+'fernandomellado2103'+String.fromCharCode(64)+'gmail.com?subject=Web para mi negocio';
+});
+</script>
+
+</body>
+</html>
