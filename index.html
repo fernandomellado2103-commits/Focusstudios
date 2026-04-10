@@ -42,14 +42,14 @@ body {
 /* ═══ NAV ═══ */
 nav {
   position:fixed; top:0; width:100%; z-index:1000;
-  padding:max(16px,env(safe-area-inset-top)) 40px 16px;
+  padding:max(8px,env(safe-area-inset-top)) 40px 8px;
   display:flex; justify-content:space-between; align-items:center;
   background:rgba(10,10,10,.88);
   -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px);
   border-bottom:1px solid var(--blue-line);
 }
 .nl { display:flex; align-items:center; text-decoration:none }
-.nl img { height:90px; width:auto; display:block }
+.nl img { height:120px; width:auto; display:block }
 .nk { display:flex; gap:32px; list-style:none }
 .nk a { color:var(--dim); text-decoration:none; font-size:.78rem; font-weight:500; letter-spacing:2px; text-transform:uppercase; transition:color .3s; position:relative }
 .nk a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--blue); transition:width .3s }
@@ -62,7 +62,7 @@ nav {
 .hero {
   min-height:100vh; min-height:100dvh;
   display:flex; align-items:center; justify-content:center;
-  padding:120px 24px 80px; text-align:center;
+  padding:160px 24px 80px; text-align:center;
   position:relative; overflow:hidden;
 }
 .hero-img {
@@ -91,11 +91,6 @@ nav {
   background-size:80px 80px;
 }
 .hero-in { position:relative; z-index:2; max-width:1050px }
-.hero-logo {
-  display:block; margin:0 auto 36px;
-  width:clamp(260px,34vw,420px); height:auto;
-  filter:drop-shadow(0 12px 48px rgba(45,140,240,0.5));
-}
 .hb {
   display:inline-flex; align-items:center; gap:9px;
   background:rgba(45,140,240,.07); border:1px solid rgba(45,140,240,.18);
@@ -275,7 +270,7 @@ section { padding:110px 24px }
 
 /* ═══ FOOTER ═══ */
 footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex; justify-content:space-between; align-items:center }
-.fl img { height:72px; width:auto; display:block }
+.fl img { height:100px; width:auto; display:block }
 .fc { font-size:.7rem; color:var(--dim) }
 
 /* ═══ RESPONSIVE ═══ */
@@ -290,11 +285,11 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
   .ci { padding:36px 24px }
 }
 @media(max-width:520px) {
-  nav { padding:14px 16px }
-  .nl img { height:66px }
-  .hero-logo { width:230px; margin-bottom:28px }
+  nav { padding:8px 16px }
+  .nl img { height:80px }
   .nc { padding:7px 14px; font-size:.65rem }
-  .hero { padding:88px 16px 50px }
+  .hero { padding:120px 16px 50px }
+  .hero { padding:120px 16px 50px }
   .hero h1 { font-size:2.1rem; margin-bottom:18px }
   .hb { font-size:.58rem; padding:5px 12px; margin-bottom:24px }
   .hero-sub { font-size:.9rem; margin-bottom:30px }
@@ -363,7 +358,6 @@ footer { padding:36px 24px; border-top:1px solid var(--blue-line); display:flex;
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-in">
-    <img src="assets/logo.png" alt="Focus Studios" class="hero-logo anim d1">
     <div class="hb anim d1"><span class="dot"></span> Disponible para nuevos proyectos</div>
     <h1 class="anim d2">En un rebaño de iguales,<br>sé la que <em>destaca</em></h1>
     <p class="hero-sub anim d3">Mientras el resto se conforma con lo mismo de siempre, nosotros creamos la web que hará que tu negocio sea el que todos recuerdan.</p>
